@@ -1,0 +1,19 @@
+{
+	"Genre": "Acoustic Jazz",
+    "Composer name": "Victor Young",
+	"Composer nationality": "US",
+	"Lyricist name": "Ned Washington",
+	"Lyricist nationality": "US",
+	"Performer name": "Keith Jarrett",
+	"Performer nationality": "US",
+	"Title": "Stella By Starlight",
+	"Composer collection": "The Uninvited",
+	"Performer collection": "Standards Live",
+	"Static tempo":151,
+	"Date composed": 1944,
+	"Date recorded": 1983,
+	"Recording location": {
+		"lat": [48.8566, "N"],
+		"lon": [2.3522, "E"]
+	}
+}

@@ -1,0 +1,18 @@
+{
+	"Genre": "Acoustic Jazz",
+    "Composer name": "Frank Loesser",
+	"Composer nationality": "US",
+	"Lyricist name": "Frank Loesser",
+	"Lyricist nationality": "US",
+	"Performer name": "Keith Jarrett",
+	"Performer nationality": "US",
+	"Title": "If I Were A Bell",
+	"Composer collection": "Guys And Dolls",
+	"Performer collection": "Up For It",
+	"Date composed": 1950,
+	"Date recorded": 2002,
+	"Recording location": {
+		"lat": [43.5692, "N"],
+		"lon": [7.1124, "E"]
+	}
+}

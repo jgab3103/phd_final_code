@@ -1,0 +1,19 @@
+{
+	"Genre": "Acoustic Jazz",
+    "Composer name": "Henry Mancini",
+	"Composer nationality": "US",
+	"Lyricist name": "Johnny Mercer",
+	"Lyricist nationality": "US",
+	"Performer name": "Keith Jarrett",
+	"Performer nationality": "US",
+	"Title": "Days Of Wine And Roses",
+	"Composer collection": "Days Of Wine And Roses",
+	"Performer collection": "Keith Jarrett At The Blue Note, The Complete Recordings (Vol. 3)",
+	"Static tempo":160,
+	"Date composed": 1962,
+	"Date recorded": 1994,
+	"Recording location": {
+		"lat": [40.7309, "N"],
+		"lon": [74.0007, "W"]
+	}
+}

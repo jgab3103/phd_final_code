@@ -1,0 +1,1250 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font than Computer Modern for most use cases
+    \usepackage{palatino}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{melody\_analysis}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+        \PY{c+c1}{\PYZsh{}import seaborn}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Image}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{HTML}
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Image} 
+        \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display}\PY{p}{,} \PY{n}{HTML}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}colwidth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.mpl\PYZus{}style}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{default}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.notebook\PYZus{}repr\PYZus{}html}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{k+kc}{True}\PY{p}{)}
+        \PY{k+kn}{import} \PY{n+nn}{data\PYZus{}methods}
+        \PY{k+kn}{import} \PY{n+nn}{warnings}
+        \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ignore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{k}{def} \PY{n+nf}{\PYZus{}repr\PYZus{}latex\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{to\PYZus{}latex}\PY{p}{(}\PY{p}{)}
+        \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{o}{.}\PY{n}{\PYZus{}repr\PYZus{}latex\PYZus{}} \PY{o}{=} \PY{n}{\PYZus{}repr\PYZus{}latex\PYZus{}}  
+        
+        \PY{k+kn}{from} \PY{n+nn}{music21} \PY{k}{import} \PY{o}{*}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{o}{\PYZpc{}}\PY{k}{pylab} inline
+        \PY{n}{plt}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ggplot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+/Users/jamiegabriel/anaconda/lib/python3.5/site-packages/IPython/core/interactiveshell.py:2881: FutureWarning: 
+mpl\_style had been deprecated and will be removed in a future version.
+Use `matplotlib.pyplot.style.use` instead.
+
+  exec(code\_obj, self.user\_global\_ns, self.user\_ns)
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Populating the interactive namespace from numpy and matplotlib
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} IMPORT DATA}
+        \PY{n}{data} \PY{o}{=} \PY{n}{data\PYZus{}methods}\PY{o}{.}\PY{n}{createDataSet}\PY{p}{(}\PY{p}{)}
+        \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{/} \PY{l+m+mi}{480}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{c+c1}{\PYZsh{}MUSIC 21 NOTE CONVERTER}
+        \PY{k}{def} \PY{n+nf}{map\PYZus{}array\PYZus{}to\PYZus{}notes\PYZus{}for\PYZus{}scoring}\PY{p}{(}\PY{n}{array}\PY{p}{)}\PY{p}{:}
+            \PY{n}{converted\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{array}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C\PYZsh{}\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{2}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{3}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{4}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{5}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F\PYZhy{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{6}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Gb\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{7}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{8}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A\PYZhy{}\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{9}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{10}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B\PYZhy{}\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{11}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{12}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{13}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C\PYZsh{}0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{14}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{15}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E\PYZhy{}0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{16}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{17}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{18}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G\PYZhy{}0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{19}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{20}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A\PYZhy{}0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{21}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{22}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B\PYZhy{}0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{23}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B0}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{24}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{25}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C\PYZsh{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{26}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{27}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{28}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{29}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{30}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{31}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{32}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{33}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{34}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B\PYZhy{}1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{35}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B1}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    
+                    
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{36}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{37}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C\PYZsh{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{38}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{39}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{40}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{41}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{42}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{43}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{44}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{45}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{46}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B\PYZhy{}2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{47}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B2}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    
+                    
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{48}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{49}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C\PYZsh{}3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{50}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{51}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E\PYZhy{}3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{52}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{53}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{54}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G\PYZhy{}3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{55}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{56}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A\PYZhy{}3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{57}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{58}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B\PYZhy{}3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{59}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B3}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    
+                    
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{60}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{61}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C\PYZsh{}4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{62}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{63}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E\PYZhy{}4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{64}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{65}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{66}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G\PYZhy{}4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{67}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{68}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A\PYZhy{}4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{69}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{70}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B\PYZhy{}4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{71}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B4}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    
+                    
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{72}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{73}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C\PYZsh{}5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{74}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{75}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E\PYZhy{}5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{76}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{77}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{78}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G\PYZhy{}5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{79}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{80}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A\PYZhy{}5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{81}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{82}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B\PYZhy{}5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{83}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B5}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    
+        
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{84}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{85}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C\PYZsh{}6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{86}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{87}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E\PYZhy{}6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{88}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{89}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{90}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G\PYZhy{}6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{91}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{92}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A\PYZhy{}6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{93}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{94}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B\PYZhy{}6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{95}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B6}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    
+                    
+                    
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{96}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{97}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{C\PYZsh{}7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{98}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{D7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{99}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E\PYZhy{}7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{100}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{E7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{101}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{F7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{102}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G\PYZhy{}7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{103}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{G7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{104}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A\PYZhy{}7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{105}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{A7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{106}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B\PYZhy{}7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{elif} \PY{n}{array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{==} \PY{l+m+mi}{107}\PY{p}{:}
+                    \PY{n}{converted\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{B7}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                    
+            \PY{n}{s} \PY{o}{=} \PY{n}{stream}\PY{o}{.}\PY{n}{Stream}\PY{p}{(}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{converted\PYZus{}array}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{a} \PY{o}{=} \PY{n}{note}\PY{o}{.}\PY{n}{Note}\PY{p}{(}\PY{n}{converted\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                \PY{n}{s}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+          
+            \PY{k}{return} \PY{p}{[}\PY{n}{s}\PY{p}{]}
+        
+        
+        \PY{c+c1}{\PYZsh{} ALT RETURN TYPES}
+        \PY{c+c1}{\PYZsh{}    return str(\PYZsq{},\PYZsq{}.join(converted\PYZus{}array))}
+        \PY{c+c1}{\PYZsh{}    return (len(converted\PYZus{}array))}
+                
+            
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k}{def} \PY{n+nf}{fix\PYZus{}title}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}opening\PYZus{}measure}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Measures}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}closing\PYZus{}measure}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Measures}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Measures}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{]}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}starting\PYZus{}position\PYZus{}in\PYZus{}measure}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Locations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{\PYZpc{}} \PY{l+m+mi}{1920}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{480}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}ending\PYZus{}position\PYZus{}in\PYZus{}measure}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Locations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{[}\PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Locations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{l+m+mi}{1}\PY{p}{]} \PY{o}{\PYZpc{}} \PY{l+m+mi}{1920}\PY{p}{)} \PY{o}{/} \PY{l+m+mi}{480}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}pitch\PYZus{}range}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n+nb}{max}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n+nb}{min}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+        
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}phrase\PYZus{}length}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}highest\PYZus{}pitch}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n+nb}{max}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}lowest\PYZus{}pitch}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return}  \PY{n+nb}{min}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}number\PYZus{}of\PYZus{}different\PYZus{}pitches\PYZus{}used}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}different\PYZus{}pitches\PYZus{}used}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}longest\PYZus{}duration}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n+nb}{max}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Durations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}shortest\PYZus{}duration}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n+nb}{min}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Durations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}number\PYZus{}different\PYZus{}durations\PYZus{}used}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Durations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}different\PYZus{}durations\PYZus{}used}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{k}{return} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Durations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+        
+        
+        \PY{k}{def} \PY{n+nf}{transpose\PYZus{}midi\PYZus{}numbers\PYZus{}to\PYZus{}start\PYZus{}on\PYZus{}c}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{n}{transposed\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{first\PYZus{}note\PYZus{}in\PYZus{}melody} \PY{o}{=} \PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{transposed\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{first\PYZus{}note\PYZus{}in\PYZus{}melody} \PY{o}{+} \PY{l+m+mi}{60}\PY{p}{)}
+                
+            \PY{k}{return} \PY{n}{transposed\PYZus{}array}
+        
+        
+        \PY{k}{def} \PY{n+nf}{create\PYZus{}notes\PYZus{}without\PYZus{}rhythm\PYZus{}for\PYZus{}render}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+          
+            \PY{n}{s} \PY{o}{=} \PY{n}{stream}\PY{o}{.}\PY{n}{Stream}\PY{p}{(}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{a} \PY{o}{=} \PY{n}{note}\PY{o}{.}\PY{n}{Note}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                \PY{n}{s}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+            \PY{k}{return} \PY{n}{s}
+        
+        \PY{k}{def} \PY{n+nf}{create\PYZus{}notes\PYZus{}with\PYZus{}rhythm\PYZus{}for\PYZus{}render}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{n}{durations} \PY{o}{=} \PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Durations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+            \PY{n}{s} \PY{o}{=} \PY{n}{stream}\PY{o}{.}\PY{n}{Stream}\PY{p}{(}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{a} \PY{o}{=} \PY{n}{note}\PY{o}{.}\PY{n}{Note}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{quarterLength} \PY{o}{=} \PY{n}{durations}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                \PY{n}{s}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+            \PY{k}{return} \PY{n}{s}
+          
+        \PY{k}{def} \PY{n+nf}{create\PYZus{}notes\PYZus{}without\PYZus{}rhythm\PYZus{}for\PYZus{}render\PYZus{}start\PYZus{}on\PYZus{}c}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+          
+            \PY{n}{s} \PY{o}{=} \PY{n}{stream}\PY{o}{.}\PY{n}{Stream}\PY{p}{(}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Melodies transposed to start on middle C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{a} \PY{o}{=} \PY{n}{note}\PY{o}{.}\PY{n}{Note}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Melodies transposed to start on middle C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                \PY{n}{s}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+            \PY{k}{return} \PY{n}{s}
+        
+        \PY{k}{def} \PY{n+nf}{create\PYZus{}notes\PYZus{}with\PYZus{}rhythm\PYZus{}for\PYZus{}renderstart\PYZus{}on\PYZus{}c}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{n}{durations} \PY{o}{=} \PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Durations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+            \PY{n}{s} \PY{o}{=} \PY{n}{stream}\PY{o}{.}\PY{n}{Stream}\PY{p}{(}\PY{p}{)}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Melodies transposed to start on middle C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{a} \PY{o}{=} \PY{n}{note}\PY{o}{.}\PY{n}{Note}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Melodies transposed to start on middle C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{quarterLength} \PY{o}{=} \PY{n}{durations}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                \PY{n}{s}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+            \PY{k}{return} \PY{n}{s}
+          
+        \PY{k}{def} \PY{n+nf}{create\PYZus{}relative\PYZus{}distances\PYZus{}between\PYZus{}notes}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{n}{midi\PYZus{}array} \PY{o}{=} \PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+            \PY{n}{relative\PYZus{}pitch\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{midi\PYZus{}array}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{relative\PYZus{}pitch\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{midi\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{midi\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+            \PY{k}{return} \PY{n}{relative\PYZus{}pitch\PYZus{}array}
+            
+            
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}number\PYZus{}of\PYZus{}negative\PYZus{}melodic\PYZus{}moves}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{count} \PY{o}{=} \PY{n}{count} \PY{o}{+} \PY{l+m+mi}{1}
+                    
+            \PY{k}{return} \PY{n}{count}
+            
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}number\PYZus{}of\PYZus{}postive\PYZus{}melodic\PYZus{}moves}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{count} \PY{o}{=} \PY{n}{count} \PY{o}{+} \PY{l+m+mi}{1}
+                    
+            \PY{k}{return} \PY{n}{count}
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}number\PYZus{}of\PYZus{}tones\PYZus{}and\PYZus{}semitones}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mi}{3}\PY{p}{:}
+                    \PY{n}{count} \PY{o}{=} \PY{n}{count} \PY{o}{+} \PY{l+m+mi}{1}
+                    
+            \PY{k}{return} \PY{n}{count}
+            
+        
+        \PY{k}{def} \PY{n+nf}{get\PYZus{}number\PYZus{}moves\PYZus{}min\PYZus{}third\PYZus{}and\PYZus{}above}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+            \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{2}\PY{p}{:}
+                    \PY{n}{count} \PY{o}{=} \PY{n}{count} \PY{o}{+} \PY{l+m+mi}{1}
+                    
+            \PY{k}{return} \PY{n}{count}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k}{def} \PY{n+nf}{convert\PYZus{}records\PYZus{}to\PYZus{}musical\PYZus{}phrases}\PY{p}{(}\PY{n}{arr}\PY{p}{)}\PY{p}{:}
+              
+            \PY{n}{note\PYZus{}arr} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{note\PYZus{}array\PYZus{}converted\PYZus{}for\PYZus{}score\PYZus{}arr} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{temp\PYZus{}note\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+            \PY{n}{full\PYZus{}title\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{temp\PYZus{}title\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+            \PY{n}{measure\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{temp\PYZus{}measure\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+            \PY{n}{location\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{temp\PYZus{}location\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+            \PY{n}{duration\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            \PY{n}{temp\PYZus{}duration\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+            
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{arr}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+            
+                \PY{k}{if} \PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]} \PY{o}{!=} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{:}
+                    \PY{n}{temp\PYZus{}note\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{temp\PYZus{}measure\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{temp\PYZus{}title\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{temp\PYZus{}location\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+                    \PY{n}{temp\PYZus{}duration\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+                    
+                \PY{k}{else}\PY{p}{:}
+                    \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{temp\PYZus{}note\PYZus{}array}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                        \PY{n}{note\PYZus{}arr}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{temp\PYZus{}note\PYZus{}array}\PY{p}{)}
+                        \PY{n}{full\PYZus{}title\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{temp\PYZus{}title\PYZus{}array}\PY{p}{)}
+                        \PY{n}{measure\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{temp\PYZus{}measure\PYZus{}array}\PY{p}{)}
+                        \PY{n}{location\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{temp\PYZus{}location\PYZus{}array}\PY{p}{)}
+                        
+                        \PY{n}{duration\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{temp\PYZus{}duration\PYZus{}array}\PY{p}{)}
+                    
+                    \PY{n}{temp\PYZus{}note\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                    \PY{n}{temp\PYZus{}title\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                    \PY{n}{temp\PYZus{}measure\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                    \PY{n}{temp\PYZus{}location\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                    \PY{n}{temp\PYZus{}duration\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                    
+            
+            
+            
+            \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{note\PYZus{}arr}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                \PY{n}{note\PYZus{}array\PYZus{}converted\PYZus{}for\PYZus{}score\PYZus{}arr}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{map\PYZus{}array\PYZus{}to\PYZus{}notes\PYZus{}for\PYZus{}scoring}\PY{p}{(}\PY{n}{note\PYZus{}arr}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+                
+        
+            \PY{k}{return} \PY{p}{[}\PY{n}{note\PYZus{}array\PYZus{}converted\PYZus{}for\PYZus{}score\PYZus{}arr}\PY{p}{,} 
+                    \PY{n}{note\PYZus{}arr}\PY{p}{,} 
+                    \PY{n}{full\PYZus{}title\PYZus{}array}\PY{p}{,} 
+                    \PY{n}{measure\PYZus{}array}\PY{p}{,}
+                    \PY{n}{location\PYZus{}array}\PY{p}{,} 
+                    \PY{n}{duration\PYZus{}array}\PY{p}{]}
+                
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{k}{def} \PY{n+nf}{create\PYZus{}melody\PYZus{}frame}\PY{p}{(}\PY{n}{dataframe}\PY{p}{,} \PY{n}{title}\PY{p}{)}\PY{p}{:}
+            \PY{n}{data} \PY{o}{=} \PY{n}{dataframe}\PY{p}{[}\PY{n}{dataframe}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{n}{title}\PY{p}{]}
+            \PY{n}{data} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi number}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Current measure}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Location}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+            
+            \PY{n}{melodies} \PY{o}{=} \PY{n}{convert\PYZus{}records\PYZus{}to\PYZus{}musical\PYZus{}phrases}\PY{p}{(}\PY{n}{data}\PY{p}{)}
+            \PY{n}{melodies} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{melodies}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+            \PY{n}{melodies}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Render data without rhythm}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Midi numbers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Measures}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Locations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Durations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+            
+            
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{fix\PYZus{}title}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Phrase length in notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}phrase\PYZus{}length}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Measure that phrase begins}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}opening\PYZus{}measure}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Measure that phrase ends}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}closing\PYZus{}measure}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Location in measure that phrase begins}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}starting\PYZus{}position\PYZus{}in\PYZus{}measure}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Location in measure that phrase ends}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}ending\PYZus{}position\PYZus{}in\PYZus{}measure}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Music pitch range}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}pitch\PYZus{}range}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of different pitches used}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}number\PYZus{}of\PYZus{}different\PYZus{}pitches\PYZus{}used}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Highest pitch used}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}highest\PYZus{}pitch}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lowest pitch used}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}lowest\PYZus{}pitch}\PY{p}{,} \PY{n}{axis} \PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Different pitches}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}different\PYZus{}pitches\PYZus{}used}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Different durations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}different\PYZus{}durations\PYZus{}used}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Longest duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}longest\PYZus{}duration}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shortest duration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}shortest\PYZus{}duration}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of different durations used in melody}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}number\PYZus{}different\PYZus{}durations\PYZus{}used}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Melodies transposed to start on middle C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{transpose\PYZus{}midi\PYZus{}numbers\PYZus{}to\PYZus{}start\PYZus{}on\PYZus{}c}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        
+        
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{create\PYZus{}relative\PYZus{}distances\PYZus{}between\PYZus{}notes}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Postive moves in melody}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}number\PYZus{}of\PYZus{}postive\PYZus{}melodic\PYZus{}moves}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Negative moves in melody}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}number\PYZus{}of\PYZus{}negative\PYZus{}melodic\PYZus{}moves}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Small melodic moves}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}number\PYZus{}of\PYZus{}tones\PYZus{}and\PYZus{}semitones}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Big melodic moves}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}number\PYZus{}moves\PYZus{}min\PYZus{}third\PYZus{}and\PYZus{}above}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Notes without rhythm}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{create\PYZus{}notes\PYZus{}without\PYZus{}rhythm\PYZus{}for\PYZus{}render}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Notes with rhythm}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{create\PYZus{}notes\PYZus{}with\PYZus{}rhythm\PYZus{}for\PYZus{}render}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Notes without rhythm from C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{create\PYZus{}notes\PYZus{}without\PYZus{}rhythm\PYZus{}for\PYZus{}render\PYZus{}start\PYZus{}on\PYZus{}c}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Notes with rhythm from C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{create\PYZus{}notes\PYZus{}with\PYZus{}rhythm\PYZus{}for\PYZus{}renderstart\PYZus{}on\PYZus{}c}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+        
+        
+        \PY{c+c1}{\PYZsh{}set of pitches}
+        \PY{c+c1}{\PYZsh{}set of durations}
+        
+            \PY{k}{del} \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Measures}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+            \PY{k}{del} \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Locations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+            \PY{k}{del} \PY{n}{melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Render data without rhythm}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+            
+            
+            \PY{n}{melodies}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Melody midi numbers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Melody durations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of notes in melody}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Measure in which phrase begins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Measure in which phrase ends}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Measure location in which phrase begins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Measure location in which phrase ends}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Range of melody in semitones}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of pitches used in melody}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Highest pitch used in melody}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lowest pitch used in melody}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Different pitches used in melody}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Different durations used in melody}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Longest duration used in melody}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shortest duration used in melody}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of different durations used in melody}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Melody midi numbers transposed to start on middle C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Distances between subsequent melody notes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of positive steps or leaps in melody}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of negative steps or leaves in melody}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of step movements (by tones or semitones) in melody}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of leap movements (by minor thirds or above) in melody}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Melody without rhythm render data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Melody with rhythm render data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Melody without rhythm from C render data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+             \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Melody with rhythm from C render data}\PY{l+s+s1}{\PYZsq{}}
+            \PY{p}{]}
+        
+            \PY{k}{return} \PY{n}{melodies}
+            
+            
+        \PY{n}{all\PYZus{}the\PYZus{}things\PYZus{}your\PYZus{}are\PYZus{}melodies} \PY{o}{=} \PY{n}{create\PYZus{}melody\PYZus{}frame}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{All The Things You Are}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{autumn\PYZus{}leaves\PYZus{}melodies} \PY{o}{=} \PY{n}{create\PYZus{}melody\PYZus{}frame}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Autumn Leaves}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{groovin\PYZus{}high\PYZus{}melodies} \PY{o}{=} \PY{n}{create\PYZus{}melody\PYZus{}frame}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Groovin High}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{if\PYZus{}i\PYZus{}were\PYZus{}a\PYZus{}bell\PYZus{}melodies} \PY{o}{=} \PY{n}{create\PYZus{}melody\PYZus{}frame}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{If I Were A Bell}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{stella\PYZus{}by\PYZus{}starlight\PYZus{}melodies} \PY{o}{=} \PY{n}{create\PYZus{}melody\PYZus{}frame}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Stella By Starlight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{someday\PYZus{}my\PYZus{}prince\PYZus{}will\PYZus{}come\PYZus{}melodies} \PY{o}{=} \PY{n}{create\PYZus{}melody\PYZus{}frame}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Someday my prince will come}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        \PY{n}{days\PYZus{}of\PYZus{}wine\PYZus{}and\PYZus{}roses\PYZus{}melodies} \PY{o}{=} \PY{n}{create\PYZus{}melody\PYZus{}frame}\PY{p}{(}\PY{n}{data}\PY{p}{,} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Days Of Wine And Roses}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{all\PYZus{}melodies} \PY{o}{=} \PY{p}{[}\PY{n}{all\PYZus{}the\PYZus{}things\PYZus{}your\PYZus{}are\PYZus{}melodies}\PY{p}{,} 
+                        \PY{n}{autumn\PYZus{}leaves\PYZus{}melodies}\PY{p}{,}
+                       \PY{n}{groovin\PYZus{}high\PYZus{}melodies}\PY{p}{,}
+                       \PY{n}{if\PYZus{}i\PYZus{}were\PYZus{}a\PYZus{}bell\PYZus{}melodies}\PY{p}{,}
+                       \PY{n}{stella\PYZus{}by\PYZus{}starlight\PYZus{}melodies}\PY{p}{,}
+                       \PY{n}{someday\PYZus{}my\PYZus{}prince\PYZus{}will\PYZus{}come\PYZus{}melodies}\PY{p}{,}
+                       \PY{n}{days\PYZus{}of\PYZus{}wine\PYZus{}and\PYZus{}roses\PYZus{}melodies}\PY{p}{]}
+        \PY{n}{all\PYZus{}melodies} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{n}{all\PYZus{}melodies}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{c+c1}{\PYZsh{}SAMPLE RECORD}
+        \PY{n}{all\PYZus{}the\PYZus{}things\PYZus{}your\PYZus{}are\PYZus{}melodies}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}8}]:}
+    
+    \begin{tabular}{ll}
+\toprule
+{} &                                    0 \\
+\midrule
+Melody midi numbers                                           &  [70, 68, 72, 67, 65, 64] \\
+Title                                                         &  All The Things You Are \\
+Melody durations                                              &  [1.0, 2.0, 1.5, 0.5, 1.0, 1.0] \\
+Number of notes in melody                                     &  6 \\
+Measure in which phrase begins                                &  1 \\
+Measure in which phrase ends                                  &  2 \\
+Measure location in which phrase begins                       &  1 \\
+Measure location in which phrase ends                         &  3 \\
+Range of melody in semitones                                  &  8 \\
+Number of pitches used in melody                              &  6 \\
+Highest pitch used in melody                                  &  72 \\
+Lowest pitch used in melody                                   &  64 \\
+Different pitches used in melody                              &  [64, 65, 67, 68, 70, 72] \\
+Different durations used in melody                            &  [0.5, 1.0, 2.0, 1.5] \\
+Longest duration used in melody                               &  2 \\
+Shortest duration used in melody                              &  0.5 \\
+Number of different durations used in melody                  &  4 \\
+Melody midi numbers transposed to start on middle C           &  [60, 58, 62, 57, 55, 54] \\
+Distances between subsequent melody notes                     &  [-2, 4, -5, -2, -1] \\
+Number of positive steps or leaps in melody                   &  1 \\
+Number of negative steps or leaves in melody                  &  4 \\
+Number of step movements (by tones or semitones) in melody    &  3 \\
+Number of leap movements (by minor thirds or above) in melody &  2 \\
+Melody without rhythm render data                             &  <music21.stream.Stream 0x11c162f98> \\
+Melody with rhythm render data                                &  <music21.stream.Stream 0x116090748> \\
+Melody without rhythm from C render data                      &  <music21.stream.Stream 0x1178d7c18> \\
+Melody with rhythm from C render data                         &  <music21.stream.Stream 0x11a1c9748> \\
+\bottomrule
+\end{tabular}
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{c+c1}{\PYZsh{}RENDER SAMPLE RECORD}
+        \PY{n}{all\PYZus{}the\PYZus{}things\PYZus{}your\PYZus{}are\PYZus{}melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Melody without rhythm render data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}9}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{melody_analysis_files/melody_analysis_8_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{all\PYZus{}the\PYZus{}things\PYZus{}your\PYZus{}are\PYZus{}melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Melody with rhythm render data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}10}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{melody_analysis_files/melody_analysis_9_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{all\PYZus{}the\PYZus{}things\PYZus{}your\PYZus{}are\PYZus{}melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Melody without rhythm from C render data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}11}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{melody_analysis_files/melody_analysis_10_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{all\PYZus{}the\PYZus{}things\PYZus{}your\PYZus{}are\PYZus{}melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Melody with rhythm from C render data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}12}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{melody_analysis_files/melody_analysis_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{c+c1}{\PYZsh{} LOOK AT UNIQUE MELODIES}
+         
+         
+         \PY{n}{all\PYZus{}melodies}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}str\PYZus{} Melody midi numbers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Melody midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{ret\PYZus{}list}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n+nb}{eval}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{n}{multiple\PYZus{}melodies} \PY{o}{=} \PY{n}{all\PYZus{}melodies}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}str\PYZus{} Melody midi numbers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}frame}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{8}\PY{p}{)}
+         \PY{n}{multiple\PYZus{}melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{multiple\PYZus{}melodies}\PY{o}{.}\PY{n}{index}
+         \PY{n}{multiple\PYZus{}melodies} \PY{o}{=} \PY{n}{multiple\PYZus{}melodies}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{multiple\PYZus{}melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{multiple\PYZus{}melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{ret\PYZus{}list}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{multiple\PYZus{}melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{render\PYZus{}data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{multiple\PYZus{}melodies}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{create\PYZus{}notes\PYZus{}without\PYZus{}rhythm\PYZus{}for\PYZus{}render}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{rend\PYZus{}values} \PY{o}{=} \PY{n}{multiple\PYZus{}melodies}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{render\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         
+         \PY{n}{multiple\PYZus{}melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}str\PYZus{} Midi numbers for merge}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{multiple\PYZus{}melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}
+         
+         \PY{n}{merged} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{multiple\PYZus{}melodies}\PY{p}{,} \PY{n}{all\PYZus{}melodies}\PY{p}{,} \PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}str\PYZus{} Midi numbers for merge}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}str\PYZus{} Melody midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{merged}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[}  \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}str\PYZus{} Melody midi numbers\PYZus{}y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Measure in which phrase begins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}13}]:}
+    
+    \begin{tabular}{lllr}
+\toprule
+         &                        &   &  Midi numbers \\
+\_str\_ Melody midi numbers\_y & Title & Measure in which phrase begins &               \\
+\midrule
+[67, 65] & Someday my prince will come & 151 &  1 \\
+         & Stella By Starlight & 49 &  1 \\
+[67] & All The Things You Are & 264 &  1 \\
+         & Stella By Starlight & 1 &  1 \\
+         &                        & 3 &  1 \\
+[68] & All The Things You Are & 264 &  1 \\
+         & If I Were A Bell & 125 &  1 \\
+[70, 68] & All The Things You Are & 121 &  1 \\
+         & Someday my prince will come & 151 &  1 \\
+[70] & All The Things You Are & 263 &  1 \\
+         & If I Were A Bell & 225 &  1 \\
+[72] & Autumn Leaves & 145 &  1 \\
+         & If I Were A Bell & 8 &  1 \\
+         &                        & 14 &  1 \\
+[74, 72] & All The Things You Are & 200 &  1 \\
+         &                        & 263 &  1 \\
+[74] &                        & 199 &  1 \\
+         & Stella By Starlight & 97 &  1 \\
+\bottomrule
+\end{tabular}
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{rend\PYZus{}values}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}14}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{melody_analysis_files/melody_analysis_14_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{rend\PYZus{}values}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}15}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{melody_analysis_files/melody_analysis_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{rend\PYZus{}values}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}16}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{melody_analysis_files/melody_analysis_16_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{rend\PYZus{}values}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}17}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{melody_analysis_files/melody_analysis_17_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{n}{rend\PYZus{}values}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}18}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{melody_analysis_files/melody_analysis_18_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{rend\PYZus{}values}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}19}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{melody_analysis_files/melody_analysis_19_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{rend\PYZus{}values}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{]}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}20}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{melody_analysis_files/melody_analysis_20_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{rend\PYZus{}values}\PY{p}{[}\PY{l+m+mi}{7}\PY{p}{]}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}21}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{melody_analysis_files/melody_analysis_21_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{all\PYZus{}melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}str\PYZus{} Melody midi numbers transposed to start on middle C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Melody midi numbers transposed to start on middle C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}
+         
+         \PY{n}{multiple\PYZus{}melodies\PYZus{}from\PYZus{}c} \PY{o}{=} \PY{n}{all\PYZus{}melodies}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}str\PYZus{} Melody midi numbers transposed to start on middle C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{to\PYZus{}frame}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{)}
+         \PY{n}{multiple\PYZus{}melodies\PYZus{}from\PYZus{}c}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{multiple\PYZus{}melodies\PYZus{}from\PYZus{}c}\PY{o}{.}\PY{n}{index}
+         \PY{n}{multiple\PYZus{}melodies\PYZus{}from\PYZus{}c} \PY{o}{=} \PY{n}{multiple\PYZus{}melodies\PYZus{}from\PYZus{}c}\PY{o}{.}\PY{n}{reset\PYZus{}index}\PY{p}{(}\PY{n}{drop}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+         
+         \PY{n}{multiple\PYZus{}melodies\PYZus{}from\PYZus{}c}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{multiple\PYZus{}melodies\PYZus{}from\PYZus{}c}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{ret\PYZus{}list}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{multiple\PYZus{}melodies\PYZus{}from\PYZus{}c}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{render\PYZus{}data}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{multiple\PYZus{}melodies\PYZus{}from\PYZus{}c}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{create\PYZus{}notes\PYZus{}without\PYZus{}rhythm\PYZus{}for\PYZus{}render}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         
+         \PY{n}{rend\PYZus{}values} \PY{o}{=} \PY{n}{multiple\PYZus{}melodies\PYZus{}from\PYZus{}c}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{render\PYZus{}data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{values}
+         \PY{n}{multiple\PYZus{}melodies\PYZus{}from\PYZus{}c}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}str\PYZus{} Midi numbers for merge}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{multiple\PYZus{}melodies\PYZus{}from\PYZus{}c}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n+nb}{str}\PY{p}{)}
+         
+         \PY{n}{merged} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{merge}\PY{p}{(}\PY{n}{multiple\PYZus{}melodies\PYZus{}from\PYZus{}c}\PY{p}{,} \PY{n}{all\PYZus{}melodies}\PY{p}{,} \PY{n}{left\PYZus{}on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}str\PYZus{} Midi numbers for merge}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{right\PYZus{}on}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{\PYZus{}str\PYZus{} Melody midi numbers transposed to start on middle C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,} \PY{n}{how}\PY{o}{=}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{left}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{n}{merged}\PY{o}{.}\PY{n}{groupby}\PY{p}{(}\PY{p}{[} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZus{}str\PYZus{} Melody midi numbers transposed to start on middle C\PYZus{}y}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}   \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Measure in which phrase begins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}\PY{o}{.}\PY{n}{count}\PY{p}{(}\PY{p}{)}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{to\PYZus{}frame}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}22}]:}
+    
+    \begin{tabular}{lllr}
+\toprule
+         &                        &   &  Midi numbers \\
+\_str\_ Melody midi numbers transposed to start on middle C\_y & Title & Measure in which phrase begins &               \\
+\midrule
+[60, 56] & Stella By Starlight & 26 &  1 \\
+         &                        & 107 &  1 \\
+[60, 57, 53] & All The Things You Are & 20 &  1 \\
+         & If I Were A Bell & 226 &  1 \\
+[60, 57] & All The Things You Are & 65 &  1 \\
+         & Autumn Leaves & 25 &  1 \\
+         & Groovin High & 163 &  1 \\
+         &                        & 195 &  1 \\
+         & Stella By Starlight & 106 &  1 \\
+[60, 58] & All The Things You Are & 121 &  1 \\
+         &                        & 200 &  1 \\
+         &                        & 263 &  1 \\
+         & Someday my prince will come & 148 &  1 \\
+         &                        & 149 &  3 \\
+         &                        & 151 &  2 \\
+         & Stella By Starlight & 49 &  1 \\
+[60, 59, 57] & All The Things You Are & 37 &  1 \\
+         & If I Were A Bell & 163 &  1 \\
+         & Someday my prince will come & 250 &  1 \\
+[60, 59, 60] & All The Things You Are & 28 &  1 \\
+         &                        & 29 &  1 \\
+         & Stella By Starlight & 18 &  1 \\
+[60, 59] & Days Of Wine And Roses & 129 &  1 \\
+         & If I Were A Bell & 84 &  1 \\
+[60, 61] & Groovin High & 145 &  1 \\
+         & If I Were A Bell & 84 &  1 \\
+         & Someday my prince will come & 206 &  1 \\
+[60, 63] & All The Things You Are & 76 &  1 \\
+         &                        & 121 &  1 \\
+[60] &                        & 199 &  1 \\
+         &                        & 263 &  1 \\
+         &                        & 264 &  2 \\
+         & Autumn Leaves & 145 &  1 \\
+         & Days Of Wine And Roses & 14 &  1 \\
+         &                        & 18 &  1 \\
+         & If I Were A Bell & 8 &  1 \\
+         &                        & 14 &  1 \\
+         &                        & 125 &  1 \\
+         &                        & 141 &  1 \\
+         &                        & 225 &  1 \\
+         & Stella By Starlight & 1 &  1 \\
+         &                        & 3 &  1 \\
+         &                        & 97 &  1 \\
+\bottomrule
+\end{tabular}
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{rend\PYZus{}values}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}24}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{melody_analysis_files/melody_analysis_24_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{rend\PYZus{}values}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}25}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{melody_analysis_files/melody_analysis_25_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{rend\PYZus{}values}\PY{p}{[}\PY{l+m+mi}{9}\PY{p}{]}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}26}]:}
+    
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{melody_analysis_files/melody_analysis_26_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{}all\PYZus{}melodies}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

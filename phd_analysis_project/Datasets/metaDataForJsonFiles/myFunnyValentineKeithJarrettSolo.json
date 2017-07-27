@@ -1,0 +1,19 @@
+{
+	"Genre": "Acoustic Jazz",
+    "Composer name": "Richard Rogers",
+	"Composer nationality": "US",
+	"Lyricist name": "Lorenz Hart",
+	"Lyricist nationality": "US",
+	"Performer name": "Keith Jarrett",
+	"Performer nationality": "US",
+	"Title": "My Funny Valentine",
+	"Composer collection": "Babes In Arms",
+	"Performer collection": "Still Live",
+    "Static tempo":122,
+	"Date composed": 1937,
+	"Date recorded": 1986,
+	"Recording location": {
+		"lat": [48.1351, "N"],
+		"lon": [11.5820, "E"]
+	}
+}

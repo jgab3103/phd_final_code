@@ -1,0 +1,20 @@
+{
+    "Genre": "Acoustic Jazz",
+	"Composer name": "Jerome Kern",
+	"Composer nationality": "US",
+	"Lyricist name": "Oscar Hammerstein II",
+	"Lyricist nationality": "US",
+	"Performer name": "Lennie Tristano",
+	"Performer nationality": "US",
+	"Title": "All The Things You Are",
+	"Composer collection": "Very Warm For May",
+	"Performer collection": "Lennie Tristano",
+	"Static tempo":198,
+	"Date composed": 1939,
+	"Date recorded": 1983,
+	"Recording location": {
+		"lat": [40.7128, "N"],
+		"lon": [74.0059, "W"]
+	}
+}
+

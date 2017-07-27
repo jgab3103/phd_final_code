@@ -1,0 +1,1467 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font than Computer Modern for most use cases
+    \usepackage{palatino}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{analysis\_6}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}66}]:} \PY{c+c1}{\PYZsh{} CREATE MICROPHRASES BETWEEN 3 AND 10 NOTES LONG}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}67}]:} \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd}
+         \PY{k+kn}{from} \PY{n+nn}{textwrap} \PY{k}{import} \PY{n}{wrap}
+         \PY{c+c1}{\PYZsh{}import seaborn}
+         \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Image}
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{HTML}
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{core}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{Image} 
+         \PY{k+kn}{from} \PY{n+nn}{IPython}\PY{n+nn}{.}\PY{n+nn}{display} \PY{k}{import} \PY{n}{display}\PY{p}{,} \PY{n}{HTML}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.max\PYZus{}colwidth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.mpl\PYZus{}style}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{default}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{set\PYZus{}option}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{display.notebook\PYZus{}repr\PYZus{}html}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{k+kc}{True}\PY{p}{)}
+         \PY{k+kn}{import} \PY{n+nn}{data\PYZus{}methods}
+         \PY{k+kn}{import} \PY{n+nn}{warnings}
+         \PY{n}{warnings}\PY{o}{.}\PY{n}{filterwarnings}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{ignore}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+         \PY{k}{def} \PY{n+nf}{\PYZus{}repr\PYZus{}latex\PYZus{}}\PY{p}{(}\PY{n+nb+bp}{self}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n+nb+bp}{self}\PY{o}{.}\PY{n}{to\PYZus{}latex}\PY{p}{(}\PY{p}{)}
+         \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{o}{.}\PY{n}{\PYZus{}repr\PYZus{}latex\PYZus{}} \PY{o}{=} \PY{n}{\PYZus{}repr\PYZus{}latex\PYZus{}}  
+         
+         \PY{k+kn}{from} \PY{n+nn}{music21} \PY{k}{import} \PY{o}{*}
+         
+         \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+         \PY{o}{\PYZpc{}}\PY{k}{pylab} inline
+         \PY{n}{plt}\PY{o}{.}\PY{n}{style}\PY{o}{.}\PY{n}{use}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ggplot}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         
+         
+         \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{font.family}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{arial}\PY{l+s+s2}{\PYZdq{}}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Populating the interactive namespace from numpy and matplotlib
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}68}]:} \PY{k}{global} \PY{n}{MICROPHRASE\PYZus{}SIZE}
+         \PY{n}{MICROPHRASE\PYZus{}SIZE} \PY{o}{=} \PY{l+m+mi}{5}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{c+c1}{\PYZsh{}UTILITY TO MANAGE LABEL WRAPPING}
+         \PY{n}{labels}\PY{o}{=}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of phrases starting at this measure location}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                 \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of phrases ending at this measure location}\PY{l+s+s2}{\PYZdq{}}\PY{p}{,}
+                 \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of phrases}\PY{l+s+s1}{\PYZsq{}}
+                \PY{p}{]}
+         \PY{n}{labels} \PY{o}{=} \PY{p}{[} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+se}{\PYZbs{}n}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{join}\PY{p}{(}\PY{n}{wrap}\PY{p}{(}\PY{n}{l}\PY{p}{,} \PY{l+m+mi}{20}\PY{p}{)}\PY{p}{)} \PY{k}{for} \PY{n}{l} \PY{o+ow}{in} \PY{n}{labels} \PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}70}]:} \PY{n}{all\PYZus{}melodies} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{./data\PYZus{}frames/all\PYZus{}melodies\PYZus{}frame}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{kj\PYZus{}solos} \PY{o}{=} \PY{n}{all\PYZus{}melodies}\PY{p}{[}\PY{n}{all\PYZus{}melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Performer name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Keith Jarrett}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{ref\PYZus{}solos} \PY{o}{=} \PY{n}{all\PYZus{}melodies}\PY{p}{[}\PY{n}{all\PYZus{}melodies}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Performer name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{!=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Keith Jarrett}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{attya} \PY{o}{=} \PY{n}{kj\PYZus{}solos}\PY{p}{[}\PY{n}{kj\PYZus{}solos}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{All The Things You Are}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{sbs} \PY{o}{=} \PY{n}{kj\PYZus{}solos}\PY{p}{[}\PY{n}{kj\PYZus{}solos}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Stella By Starlight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{sdmpwc} \PY{o}{=} \PY{n}{kj\PYZus{}solos}\PY{p}{[}\PY{n}{kj\PYZus{}solos}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Someday My Prince Will Come}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{gh} \PY{o}{=} \PY{n}{kj\PYZus{}solos}\PY{p}{[}\PY{n}{kj\PYZus{}solos}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Groovin High}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{dowar} \PY{o}{=} \PY{n}{kj\PYZus{}solos}\PY{p}{[}\PY{n}{kj\PYZus{}solos}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Days Of Wine And Roses}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{al} \PY{o}{=} \PY{n}{kj\PYZus{}solos}\PY{p}{[}\PY{n}{kj\PYZus{}solos}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Autumn Leaves}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{iiwab} \PY{o}{=} \PY{n}{kj\PYZus{}solos}\PY{p}{[}\PY{n}{kj\PYZus{}solos}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{If I Were A Bell}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         
+         
+         \PY{n}{attya\PYZus{}r} \PY{o}{=} \PY{n}{ref\PYZus{}solos}\PY{p}{[}\PY{n}{ref\PYZus{}solos}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{All The Things You Are}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{sbs\PYZus{}r} \PY{o}{=} \PY{n}{ref\PYZus{}solos}\PY{p}{[}\PY{n}{ref\PYZus{}solos}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Stella By Starlight}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+         \PY{n}{al\PYZus{}r} \PY{o}{=} \PY{n}{ref\PYZus{}solos}\PY{p}{[}\PY{n}{ref\PYZus{}solos}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Title}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{==} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Autumn Leaves}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}71}]:} \PY{n}{all\PYZus{}melodies}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}71}]:}
+    
+    \begin{tabular}{llll}
+\toprule
+{} &                                   0 &                                   1 &                                                        2 \\
+\midrule
+Phrase midi numbers                                           &  [70, 68, 72, 67, 65, 64] &  [65, 65, 67, 67, 68, 68] &  [70, 72, 73, 73, 67, 65, 63, 72, 72, 67, 65] \\
+Title                                                         &  All The Things You Are &  All The Things You Are &  All The Things You Are \\
+Phrase durations                                              &  [1.0, 2.0, 1.5, 0.5, 1.0, 1.0] &  [0.5, 0.5, 0.5, 0.5, 0.5, 1.0] &  [0.5, 1.0, 1.0, 1.0, 1.0, 1.0, 0.5, 0.5, 1.5, 0.5, 1.0] \\
+Performer name                                                &  Keith Jarrett &  Keith Jarrett &  Keith Jarrett \\
+Number of notes in phrase                                     &  6 &  6 &  11 \\
+Measure in which phrase begins                                &  1 &  3 &  4 \\
+Measure in which phrase ends                                  &  2 &  3 &  6 \\
+Measure location in which phrase begins                       &  1 &  0.5 &  1.5 \\
+Measure location in which phrase ends                         &  3 &  3 &  2 \\
+Range of phrase in semitones                                  &  8 &  3 &  10 \\
+Number of pitches used in phrase                              &  6 &  3 &  6 \\
+Highest pitch used in phrase                                  &  72 &  68 &  73 \\
+Lowest pitch used in phrase                                   &  64 &  65 &  63 \\
+Different pitches used in phrase                              &  [64, 65, 67, 68, 70, 72] &  [65, 67, 68] &  [65, 67, 70, 72, 73, 63] \\
+Different durations used in phrase                            &  [0.5, 1.0, 2.0, 1.5] &  [0.5, 1.0] &  [0.5, 1.0, 1.5] \\
+Longest duration used in phrase                               &  2 &  1 &  1.5 \\
+Shortest duration used in phrase                              &  0.5 &  0.5 &  0.5 \\
+Number of different durations used in phrase                  &  4 &  2 &  3 \\
+Phrase midi numbers transposed to start on middle C           &  [60, 58, 62, 57, 55, 54] &  [60, 60, 62, 62, 63, 63] &  [60, 62, 63, 63, 57, 55, 53, 62, 62, 57, 55] \\
+Distances between subsequent phrase notes                     &  [-2, 4, -5, -2, -1] &  [0, 2, 0, 1, 0] &  [2, 1, 0, -6, -2, -2, 9, 0, -5, -2] \\
+Number of positive steps or leaps in phrase                   &  1 &  2 &  3 \\
+Number of negative steps or leaps in phrase                   &  4 &  0 &  5 \\
+Number of step movements (by tones or semitones) in phrase    &  3 &  5 &  7 \\
+Number of leap movements (by minor thirds or above) in phrase &  2 &  0 &  3 \\
+Phrase without rhythm render data                             &  <music21.stream.Stream 4731323784> &  <music21.stream.Stream 4731323392> &  <music21.stream.Stream 5310227176> \\
+Phrase with rhythm render data                                &  <music21.stream.Stream 5443730176> &  <music21.stream.Stream 5006114888> &  <music21.stream.Stream 5006116288> \\
+Phrase without rhythm from C render data                      &  <music21.stream.Stream 5392684928> &  <music21.stream.Stream 5392686216> &  <music21.stream.Stream 5240091200> \\
+Phrase with rhythm from C render data                         &  <music21.stream.Stream 5246337712> &  <music21.stream.Stream 5246339000> &  <music21.stream.Stream 5246340400> \\
+\bottomrule
+\end{tabular}
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}72}]:} \PY{n}{all\PYZus{}melodies\PYZus{}as\PYZus{}values} \PY{o}{=} \PY{n}{all\PYZus{}melodies}\PY{o}{.}\PY{n}{values}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}73}]:} \PY{c+c1}{\PYZsh{} NEW FUNCTION TO BREAK PHRASES INTO MICROPHRASES}
+         
+         
+         
+         \PY{k}{def} \PY{n+nf}{convert\PYZus{}phrase\PYZus{}to\PYZus{}microphrases}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{:}
+             \PY{n}{microphrase\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{c+c1}{\PYZsh{}print(data)}
+         
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{phrase\PYZus{}array} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+                 \PY{n}{duration\PYZus{}array} \PY{o}{=} \PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+                 
+                 \PY{n+nb}{print}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+                 
+                 \PY{k}{for} \PY{n}{j} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{phrase\PYZus{}array}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                     \PY{n}{temp\PYZus{}microphrase\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+                     \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{phrase\PYZus{}array}\PY{p}{[}\PY{n}{j}\PY{p}{:}\PY{n}{j}\PY{o}{+}\PY{n}{MICROPHRASE\PYZus{}SIZE}\PY{p}{]}\PY{p}{)}\PY{o}{==} \PY{n}{MICROPHRASE\PYZus{}SIZE}\PY{p}{:}
+                         \PY{n}{temp\PYZus{}microphrase\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{phrase\PYZus{}array}\PY{p}{[}\PY{n}{j}\PY{p}{:}\PY{n}{j}\PY{o}{+}\PY{n}{MICROPHRASE\PYZus{}SIZE}\PY{p}{]}\PY{p}{)}
+                         \PY{n}{temp\PYZus{}microphrase\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+                         \PY{n}{temp\PYZus{}microphrase\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{duration\PYZus{}array}\PY{p}{[}\PY{n}{j}\PY{p}{:}\PY{n}{j}\PY{o}{+}\PY{n}{MICROPHRASE\PYZus{}SIZE}\PY{p}{]}\PY{p}{)}
+                         \PY{n}{temp\PYZus{}microphrase\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}\PY{p}{)}
+                         \PY{n}{temp\PYZus{}microphrase\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}\PY{p}{)}
+                         \PY{n}{temp\PYZus{}microphrase\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{5}\PY{p}{]}\PY{p}{)}
+                         \PY{n}{temp\PYZus{}microphrase\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{6}\PY{p}{]}\PY{p}{)}
+                         \PY{n}{temp\PYZus{}microphrase\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{7}\PY{p}{]}\PY{p}{)}
+                         \PY{n}{temp\PYZus{}microphrase\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{data}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{8}\PY{p}{]}\PY{p}{)}
+         
+                     \PY{k}{if} \PY{n+nb}{len}\PY{p}{(}\PY{n}{temp\PYZus{}microphrase\PYZus{}array}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                         \PY{n}{microphrase\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{temp\PYZus{}microphrase\PYZus{}array}\PY{p}{)}
+                         
+                         
+                 
+         
+             
+             \PY{k}{return} \PY{n}{microphrase\PYZus{}array}
+                  
+                 
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}74}]:} \PY{n}{all\PYZus{}microphrases} \PY{o}{=} \PY{n}{convert\PYZus{}phrase\PYZus{}to\PYZus{}microphrases}\PY{p}{(}\PY{n}{all\PYZus{}melodies\PYZus{}as\PYZus{}values}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{n}{data}\PY{o}{=}\PY{n}{all\PYZus{}microphrases}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+6
+6
+11
+14
+23
+14
+11
+3
+5
+29
+5
+3
+3
+43
+3
+3
+9
+5
+7
+14
+37
+28
+9
+5
+20
+4
+4
+8
+14
+2
+34
+15
+14
+2
+49
+52
+7
+13
+21
+24
+8
+51
+13
+8
+9
+23
+7
+20
+13
+2
+2
+9
+11
+25
+36
+22
+6
+7
+17
+25
+20
+6
+17
+7
+7
+11
+3
+111
+30
+49
+5
+6
+52
+8
+6
+17
+4
+1
+2
+4
+13
+16
+4
+8
+7
+5
+9
+5
+22
+12
+3
+4
+5
+8
+64
+74
+9
+11
+3
+17
+9
+25
+30
+22
+8
+1
+2
+1
+1
+4
+4
+31
+15
+4
+21
+7
+5
+11
+11
+6
+6
+28
+5
+5
+4
+23
+27
+6
+13
+24
+5
+34
+18
+75
+41
+57
+16
+23
+14
+22
+63
+12
+14
+31
+20
+8
+2
+28
+25
+46
+26
+5
+14
+38
+41
+22
+4
+54
+22
+14
+36
+13
+74
+6
+5
+44
+27
+7
+19
+12
+11
+12
+15
+7
+34
+3
+39
+8
+7
+14
+16
+5
+15
+5
+39
+2
+1
+51
+25
+20
+21
+4
+21
+3
+6
+4
+8
+5
+3
+7
+15
+2
+10
+8
+18
+12
+15
+13
+1
+3
+9
+4
+31
+6
+8
+10
+2
+2
+2
+2
+12
+7
+7
+5
+7
+1
+3
+4
+1
+8
+13
+21
+27
+32
+3
+11
+21
+9
+2
+7
+12
+43
+21
+9
+5
+31
+5
+5
+26
+2
+7
+8
+13
+10
+35
+4
+36
+7
+39
+15
+27
+74
+4
+8
+18
+9
+60
+29
+30
+26
+11
+1
+15
+49
+7
+2
+4
+2
+43
+4
+10
+12
+61
+34
+9
+27
+34
+12
+9
+10
+10
+26
+17
+38
+29
+13
+13
+27
+6
+10
+8
+2
+22
+20
+9
+7
+11
+22
+27
+17
+5
+23
+2
+17
+3
+2
+6
+1
+39
+17
+13
+6
+1
+3
+10
+5
+2
+1
+7
+34
+5
+24
+5
+9
+7
+1
+1
+1
+2
+1
+10
+17
+2
+2
+4
+3
+16
+14
+35
+1
+1
+1
+19
+14
+38
+16
+1
+1
+1
+1
+1
+1
+1
+16
+10
+6
+1
+14
+26
+18
+3
+44
+5
+3
+5
+1
+16
+12
+41
+1
+1
+3
+1
+1
+3
+1
+1
+1
+1
+1
+1
+3
+1
+1
+14
+3
+5
+3
+5
+4
+14
+7
+17
+14
+21
+3
+22
+11
+23
+2
+2
+14
+6
+7
+28
+17
+25
+31
+41
+39
+18
+45
+59
+46
+37
+57
+91
+4
+4
+39
+40
+4
+4
+4
+4
+4
+4
+4
+4
+4
+4
+4
+15
+9
+60
+22
+5
+6
+8
+80
+2
+7
+33
+18
+38
+2
+10
+6
+21
+50
+39
+30
+13
+20
+5
+2
+5
+45
+37
+18
+11
+4
+32
+80
+35
+14
+59
+14
+15
+46
+12
+11
+6
+38
+18
+33
+46
+1
+14
+13
+1
+29
+18
+46
+16
+9
+31
+6
+12
+12
+6
+31
+10
+22
+6
+44
+10
+10
+8
+61
+9
+54
+26
+2
+2
+18
+31
+23
+44
+7
+6
+17
+26
+13
+14
+13
+9
+19
+15
+41
+33
+1
+40
+11
+73
+59
+31
+1
+38
+12
+16
+8
+3
+10
+25
+5
+3
+10
+8
+50
+31
+26
+9
+53
+5
+40
+18
+46
+11
+16
+16
+84
+5
+13
+9
+25
+25
+8
+30
+10
+3
+34
+18
+1
+3
+3
+3
+6
+5
+9
+6
+18
+37
+4
+10
+6
+15
+19
+7
+45
+24
+14
+32
+5
+29
+12
+26
+7
+14
+6
+18
+3
+51
+14
+11
+33
+70
+8
+21
+17
+22
+9
+26
+13
+45
+12
+6
+2
+2
+2
+2
+4
+2
+2
+11
+117
+20
+15
+41
+22
+37
+7
+37
+20
+36
+2
+7
+7
+16
+12
+10
+4
+87
+3
+18
+12
+28
+23
+31
+39
+23
+3
+10
+5
+56
+54
+24
+45
+38
+7
+3
+4
+4
+32
+10
+4
+1
+27
+1
+18
+3
+7
+6
+52
+7
+21
+12
+106
+50
+33
+43
+21
+21
+83
+25
+37
+27
+34
+46
+34
+44
+28
+52
+17
+39
+19
+4
+41
+7
+20
+14
+11
+12
+27
+2
+14
+11
+18
+18
+84
+45
+
+    \end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}75}]:} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}75}]:}
+    
+    \begin{tabular}{lllllrrrrr}
+\toprule
+{} &                     0 &                       1 &                          2 &              3 &   4 &  5 &  6 &    7 &    8 \\
+\midrule
+0 &  [70, 68, 72, 67, 65] &  All The Things You Are &  [1.0, 2.0, 1.5, 0.5, 1.0] &  Keith Jarrett &  6 &  1 &  2 &  1.0 &  3.0 \\
+1 &  [68, 72, 67, 65, 64] &  All The Things You Are &  [2.0, 1.5, 0.5, 1.0, 1.0] &  Keith Jarrett &  6 &  1 &  2 &  1.0 &  3.0 \\
+2 &  [65, 65, 67, 67, 68] &  All The Things You Are &  [0.5, 0.5, 0.5, 0.5, 0.5] &  Keith Jarrett &  6 &  3 &  3 &  0.5 &  3.0 \\
+3 &  [65, 67, 67, 68, 68] &  All The Things You Are &  [0.5, 0.5, 0.5, 0.5, 1.0] &  Keith Jarrett &  6 &  3 &  3 &  0.5 &  3.0 \\
+4 &  [70, 72, 73, 73, 67] &  All The Things You Are &  [0.5, 1.0, 1.0, 1.0, 1.0] &  Keith Jarrett &  11 &  4 &  6 &  1.5 &  2.0 \\
+\bottomrule
+\end{tabular}
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}76}]:} \PY{c+c1}{\PYZsh{}COL CLEAN NEEDED FOR FUNCTIONS}
+         \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Midi numbers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Durations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Performer name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of notes in melody}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                     \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Measure in which phrase begins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Measure in which phrase ends}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Measure location in which phrase begins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                                    \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Measure location in which phrase ends}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}77}]:} \PY{c+c1}{\PYZsh{}FUNCTIONS TO BUILD PHRASE DATA}
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}phrase\PYZus{}length}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}pitch\PYZus{}range}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n+nb}{max}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZhy{}} \PY{n+nb}{min}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}number\PYZus{}of\PYZus{}different\PYZus{}pitches\PYZus{}used}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}highest\PYZus{}pitch}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n+nb}{max}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}lowest\PYZus{}pitch}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return}  \PY{n+nb}{min}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}number\PYZus{}of\PYZus{}different\PYZus{}pitches\PYZus{}used}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}different\PYZus{}pitches\PYZus{}used}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}longest\PYZus{}duration}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n+nb}{max}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Durations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}shortest\PYZus{}duration}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n+nb}{min}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Durations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}number\PYZus{}different\PYZus{}durations\PYZus{}used}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n+nb}{len}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Durations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}different\PYZus{}durations\PYZus{}used}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{k}{return} \PY{n+nb}{list}\PY{p}{(}\PY{n+nb}{set}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Durations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}
+         
+         
+         \PY{k}{def} \PY{n+nf}{transpose\PYZus{}midi\PYZus{}numbers\PYZus{}to\PYZus{}start\PYZus{}on\PYZus{}c}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{n}{transposed\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{n}{first\PYZus{}note\PYZus{}in\PYZus{}melody} \PY{o}{=} \PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{transposed\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{first\PYZus{}note\PYZus{}in\PYZus{}melody} \PY{o}{+} \PY{l+m+mi}{60}\PY{p}{)}
+                 
+             \PY{k}{return} \PY{n}{transposed\PYZus{}array}
+         
+         
+         \PY{k}{def} \PY{n+nf}{create\PYZus{}notes\PYZus{}without\PYZus{}rhythm\PYZus{}for\PYZus{}render}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+           
+             \PY{n}{s} \PY{o}{=} \PY{n}{stream}\PY{o}{.}\PY{n}{Stream}\PY{p}{(}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{a} \PY{o}{=} \PY{n}{note}\PY{o}{.}\PY{n}{Note}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{s}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+             \PY{k}{return} \PY{n}{s}
+         
+         \PY{k}{def} \PY{n+nf}{create\PYZus{}notes\PYZus{}with\PYZus{}rhythm\PYZus{}for\PYZus{}render}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{n}{durations} \PY{o}{=} \PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Durations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+             \PY{n}{s} \PY{o}{=} \PY{n}{stream}\PY{o}{.}\PY{n}{Stream}\PY{p}{(}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{a} \PY{o}{=} \PY{n}{note}\PY{o}{.}\PY{n}{Note}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{quarterLength} \PY{o}{=} \PY{n}{durations}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{s}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+             \PY{k}{return} \PY{n}{s}
+           
+         \PY{k}{def} \PY{n+nf}{create\PYZus{}notes\PYZus{}without\PYZus{}rhythm\PYZus{}for\PYZus{}render\PYZus{}start\PYZus{}on\PYZus{}c}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+           
+             \PY{n}{s} \PY{o}{=} \PY{n}{stream}\PY{o}{.}\PY{n}{Stream}\PY{p}{(}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Melodies transposed to start on middle C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{a} \PY{o}{=} \PY{n}{note}\PY{o}{.}\PY{n}{Note}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Melodies transposed to start on middle C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{s}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+             \PY{k}{return} \PY{n}{s}
+         
+         \PY{k}{def} \PY{n+nf}{create\PYZus{}notes\PYZus{}with\PYZus{}rhythm\PYZus{}for\PYZus{}renderstart\PYZus{}on\PYZus{}c}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{n}{durations} \PY{o}{=} \PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Durations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+             \PY{n}{s} \PY{o}{=} \PY{n}{stream}\PY{o}{.}\PY{n}{Stream}\PY{p}{(}\PY{p}{)}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Melodies transposed to start on middle C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{a} \PY{o}{=} \PY{n}{note}\PY{o}{.}\PY{n}{Note}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Melodies transposed to start on middle C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{,} \PY{n}{quarterLength} \PY{o}{=} \PY{n}{durations}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)}
+                 \PY{n}{s}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{a}\PY{p}{)}
+             \PY{k}{return} \PY{n}{s}
+           
+         \PY{k}{def} \PY{n+nf}{create\PYZus{}relative\PYZus{}distances\PYZus{}between\PYZus{}notes}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{n}{midi\PYZus{}array} \PY{o}{=} \PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Midi numbers}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}
+             \PY{n}{relative\PYZus{}pitch\PYZus{}array} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{midi\PYZus{}array}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{n}{relative\PYZus{}pitch\PYZus{}array}\PY{o}{.}\PY{n}{append}\PY{p}{(}\PY{n}{midi\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZhy{}} \PY{n}{midi\PYZus{}array}\PY{p}{[}\PY{n}{i}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}\PY{p}{)}
+             \PY{k}{return} \PY{n}{relative\PYZus{}pitch\PYZus{}array}
+             
+             
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}number\PYZus{}of\PYZus{}negative\PYZus{}melodic\PYZus{}moves}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZlt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{count} \PY{o}{=} \PY{n}{count} \PY{o}{+} \PY{l+m+mi}{1}
+                     
+             \PY{k}{return} \PY{n}{count}
+             
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}number\PYZus{}of\PYZus{}postive\PYZus{}melodic\PYZus{}moves}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]} \PY{o}{\PYZgt{}} \PY{l+m+mi}{0}\PY{p}{:}
+                     \PY{n}{count} \PY{o}{=} \PY{n}{count} \PY{o}{+} \PY{l+m+mi}{1}
+                     
+             \PY{k}{return} \PY{n}{count}
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}number\PYZus{}of\PYZus{}tones\PYZus{}and\PYZus{}semitones}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZlt{}} \PY{l+m+mi}{3}\PY{p}{:}
+                     \PY{n}{count} \PY{o}{=} \PY{n}{count} \PY{o}{+} \PY{l+m+mi}{1}
+                     
+             \PY{k}{return} \PY{n}{count}
+             
+         
+         \PY{k}{def} \PY{n+nf}{get\PYZus{}number\PYZus{}moves\PYZus{}min\PYZus{}third\PYZus{}and\PYZus{}above}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{)}\PY{p}{:}
+             \PY{n}{count} \PY{o}{=} \PY{l+m+mi}{0}
+             \PY{k}{for} \PY{n}{i} \PY{o+ow}{in} \PY{n+nb}{range}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{)}\PY{p}{)}\PY{p}{:}
+                 \PY{k}{if} \PY{n+nb}{abs}\PY{p}{(}\PY{n}{data\PYZus{}row}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{p}{[}\PY{n}{i}\PY{p}{]}\PY{p}{)} \PY{o}{\PYZgt{}} \PY{l+m+mi}{2}\PY{p}{:}
+                     \PY{n}{count} \PY{o}{=} \PY{n}{count} \PY{o}{+} \PY{l+m+mi}{1}
+                     
+             \PY{k}{return} \PY{n}{count}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}78}]:} \PY{c+c1}{\PYZsh{}CREATE ALL OTHER AGGREGATIONS}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Phrase length in notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}phrase\PYZus{}length}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Music pitch range}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}pitch\PYZus{}range}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of different pitches used}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}number\PYZus{}of\PYZus{}different\PYZus{}pitches\PYZus{}used}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Highest pitch used}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}highest\PYZus{}pitch}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Lowest pitch used}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}lowest\PYZus{}pitch}\PY{p}{,} \PY{n}{axis} \PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Different pitches}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}different\PYZus{}pitches\PYZus{}used}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Different durations}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}different\PYZus{}durations\PYZus{}used}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Longest duration}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}longest\PYZus{}duration}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shortest duration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}shortest\PYZus{}duration}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Number of different durations used in melody}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}number\PYZus{}different\PYZus{}durations\PYZus{}used}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Melodies transposed to start on middle C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{transpose\PYZus{}midi\PYZus{}numbers\PYZus{}to\PYZus{}start\PYZus{}on\PYZus{}c}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Relative distances between notes}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{create\PYZus{}relative\PYZus{}distances\PYZus{}between\PYZus{}notes}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Postive moves in melody}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}number\PYZus{}of\PYZus{}postive\PYZus{}melodic\PYZus{}moves}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Negative moves in melody}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}number\PYZus{}of\PYZus{}negative\PYZus{}melodic\PYZus{}moves}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Small melodic moves}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}number\PYZus{}of\PYZus{}tones\PYZus{}and\PYZus{}semitones}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Big melodic moves}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{get\PYZus{}number\PYZus{}moves\PYZus{}min\PYZus{}third\PYZus{}and\PYZus{}above}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Notes without rhythm}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{create\PYZus{}notes\PYZus{}without\PYZus{}rhythm\PYZus{}for\PYZus{}render}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Notes with rhythm}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{create\PYZus{}notes\PYZus{}with\PYZus{}rhythm\PYZus{}for\PYZus{}render}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Notes without rhythm from C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{create\PYZus{}notes\PYZus{}without\PYZus{}rhythm\PYZus{}for\PYZus{}render\PYZus{}start\PYZus{}on\PYZus{}c}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+         \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Notes with rhythm from C}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]} \PY{o}{=} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{apply}\PY{p}{(}\PY{n}{create\PYZus{}notes\PYZus{}with\PYZus{}rhythm\PYZus{}for\PYZus{}renderstart\PYZus{}on\PYZus{}c}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}79}]:} \PY{c+c1}{\PYZsh{}COLUMN CLEAN}
+         \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{columns} \PY{o}{=} \PY{p}{[}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Microphase midi numbers}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Title}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Microphrase durations}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Performer name}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of notes in phrase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Measure in which phrase begins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Measure in which phrase ends}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Measure location in which phrase begins}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Measure location in which phrase ends}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Microphrase length in notes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Range of microphrase in semitones}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of different pitches used in microphrase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Highest pitch used in microphrase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Lowest pitch used in microphrase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Different pitches used in microphrase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Different durations used in microphrase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Longest duration used in microphrase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Shortest duration used in microphrase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of different durations used in microphrase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Microphrase midi numbers transposed to start on middle C}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Relative distances between microphrase notes}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of positive steps or leaps in microphrase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of negative steps or leaps in microphrase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of step movements (by tones or semitones) in microphrase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Number of leap movements (by minor thirds or above) in microphrase}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Microphrase without rhythm render data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} 
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Microphrase with rhythm render data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Microphrase without rhythm from C render data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}
+                \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Microphrase with rhythm from C render data}\PY{l+s+s1}{\PYZsq{}}
+         \PY{p}{]}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}80}]:} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}80}]:}
+    
+    \begin{tabular}{llll}
+\toprule
+{} &                                    0 &                                    1 &                                    2 \\
+\midrule
+Microphase midi numbers                                            &  [70, 68, 72, 67, 65] &  [68, 72, 67, 65, 64] &  [65, 65, 67, 67, 68] \\
+Title                                                              &  All The Things You Are &  All The Things You Are &  All The Things You Are \\
+Microphrase durations                                              &  [1.0, 2.0, 1.5, 0.5, 1.0] &  [2.0, 1.5, 0.5, 1.0, 1.0] &  [0.5, 0.5, 0.5, 0.5, 0.5] \\
+Performer name                                                     &  Keith Jarrett &  Keith Jarrett &  Keith Jarrett \\
+Number of notes in phrase                                          &  6 &  6 &  6 \\
+Measure in which phrase begins                                     &  1 &  1 &  3 \\
+Measure in which phrase ends                                       &  2 &  2 &  3 \\
+Measure location in which phrase begins                            &  1 &  1 &  0.5 \\
+Measure location in which phrase ends                              &  3 &  3 &  3 \\
+Microphrase length in notes                                        &  5 &  5 &  5 \\
+Range of microphrase in semitones                                  &  7 &  8 &  3 \\
+Number of different pitches used in microphrase                    &  5 &  5 &  3 \\
+Highest pitch used in microphrase                                  &  72 &  72 &  68 \\
+Lowest pitch used in microphrase                                   &  65 &  64 &  65 \\
+Different pitches used in microphrase                              &  [72, 65, 67, 68, 70] &  [72, 65, 67, 68, 64] &  [65, 67, 68] \\
+Different durations used in microphrase                            &  [0.5, 1.0, 2.0, 1.5] &  [0.5, 1.5, 2.0, 1.0] &  [0.5] \\
+Longest duration used in microphrase                               &  2 &  2 &  0.5 \\
+Shortest duration used in microphrase                              &  0.5 &  0.5 &  0.5 \\
+Number of different durations used in microphrase                  &  4 &  4 &  1 \\
+Microphrase midi numbers transposed to start on middle C           &  [60, 58, 62, 57, 55] &  [60, 64, 59, 57, 56] &  [60, 60, 62, 62, 63] \\
+Relative distances between microphrase notes                       &  [-2, 4, -5, -2] &  [4, -5, -2, -1] &  [0, 2, 0, 1] \\
+Number of positive steps or leaps in microphrase                   &  1 &  1 &  2 \\
+Number of negative steps or leaps in microphrase                   &  3 &  3 &  0 \\
+Number of step movements (by tones or semitones) in microphrase    &  2 &  2 &  4 \\
+Number of leap movements (by minor thirds or above) in microphrase &  2 &  2 &  0 \\
+Microphrase without rhythm render data                             &  <music21.stream.Stream 0x16891d2b0> &  <music21.stream.Stream 0x168916c50> &  <music21.stream.Stream 0x12ee04978> \\
+Microphrase with rhythm render data                                &  <music21.stream.Stream 0x11da70748> &  <music21.stream.Stream 0x11da70b70> &  <music21.stream.Stream 0x11da50048> \\
+Microphrase without rhythm from C render data                      &  <music21.stream.Stream 0x12f99feb8> &  <music21.stream.Stream 0x12f9a6320> &  <music21.stream.Stream 0x12f9a67b8> \\
+Microphrase with rhythm from C render data                         &  <music21.stream.Stream 0x140be7668> &  <music21.stream.Stream 0x140be7a90> &  <music21.stream.Stream 0x140be7f28> \\
+\bottomrule
+\end{tabular}
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}81}]:} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{to\PYZus{}pickle}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{../Datasets/DataFrames/ten\PYZus{}note\PYZus{}microphrases}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}82}]:} \PY{n}{all\PYZus{}microphrases}\PY{p}{[}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Performer name}\PY{l+s+s2}{\PYZdq{}}\PY{p}{]}\PY{o}{.}\PY{n}{value\PYZus{}counts}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+            \begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}82}]:} Keith Jarrett      8657
+         Wayne Shorter      705 
+         Lennie Tristano    364 
+         Miles Davis        133 
+         Name: Performer name, dtype: int64
+\end{Verbatim}
+        
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}83}]:} \PY{n}{all\PYZus{}microphrases}\PY{o}{.}\PY{n}{head}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{)}\PY{o}{.}\PY{n}{T}
+\end{Verbatim}
+\texttt{\color{outcolor}Out[{\color{outcolor}83}]:}
+    
+    \begin{tabular}{lll}
+\toprule
+{} &                                    0 &                                    1 \\
+\midrule
+Microphase midi numbers                                            &  [70, 68, 72, 67, 65] &  [68, 72, 67, 65, 64] \\
+Title                                                              &  All The Things You Are &  All The Things You Are \\
+Microphrase durations                                              &  [1.0, 2.0, 1.5, 0.5, 1.0] &  [2.0, 1.5, 0.5, 1.0, 1.0] \\
+Performer name                                                     &  Keith Jarrett &  Keith Jarrett \\
+Number of notes in phrase                                          &  6 &  6 \\
+Measure in which phrase begins                                     &  1 &  1 \\
+Measure in which phrase ends                                       &  2 &  2 \\
+Measure location in which phrase begins                            &  1 &  1 \\
+Measure location in which phrase ends                              &  3 &  3 \\
+Microphrase length in notes                                        &  5 &  5 \\
+Range of microphrase in semitones                                  &  7 &  8 \\
+Number of different pitches used in microphrase                    &  5 &  5 \\
+Highest pitch used in microphrase                                  &  72 &  72 \\
+Lowest pitch used in microphrase                                   &  65 &  64 \\
+Different pitches used in microphrase                              &  [72, 65, 67, 68, 70] &  [72, 65, 67, 68, 64] \\
+Different durations used in microphrase                            &  [0.5, 1.0, 2.0, 1.5] &  [0.5, 1.5, 2.0, 1.0] \\
+Longest duration used in microphrase                               &  2 &  2 \\
+Shortest duration used in microphrase                              &  0.5 &  0.5 \\
+Number of different durations used in microphrase                  &  4 &  4 \\
+Microphrase midi numbers transposed to start on middle C           &  [60, 58, 62, 57, 55] &  [60, 64, 59, 57, 56] \\
+Relative distances between microphrase notes                       &  [-2, 4, -5, -2] &  [4, -5, -2, -1] \\
+Number of positive steps or leaps in microphrase                   &  1 &  1 \\
+Number of negative steps or leaps in microphrase                   &  3 &  3 \\
+Number of step movements (by tones or semitones) in microphrase    &  2 &  2 \\
+Number of leap movements (by minor thirds or above) in microphrase &  2 &  2 \\
+Microphrase without rhythm render data                             &  <music21.stream.Stream 0x16891d2b0> &  <music21.stream.Stream 0x168916c50> \\
+Microphrase with rhythm render data                                &  <music21.stream.Stream 0x11da70748> &  <music21.stream.Stream 0x11da70b70> \\
+Microphrase without rhythm from C render data                      &  <music21.stream.Stream 0x12f99feb8> &  <music21.stream.Stream 0x12f9a6320> \\
+Microphrase with rhythm from C render data                         &  <music21.stream.Stream 0x140be7668> &  <music21.stream.Stream 0x140be7a90> \\
+\bottomrule
+\end{tabular}
+
+    
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor} }]:} 
+\end{Verbatim}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}

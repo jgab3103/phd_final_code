@@ -1,0 +1,8 @@
+composer_id,first_names,family_name,place_of_birth_latitude,place_of_birth_longitude,place_of_death_latitude,place_of_death_longitude,predominant_nationality,date_of_birth,date_of_death
+0,Dizzy,Gillespie,34.6977,-79.8834,40.890424,-73.987233,US,10/21/1917,1/6/93
+1,Frank ,Churchill,44.540983,-70.631197,34.492483,-118.625907,US,10/20/1901,05/14/1942
+2,Frank,Loesser,40.710516,-74.005511,40.710516,-74.005511,US,06/29/1910,07/29/1969
+3,Henry,Mancini,41.497943,-81.69763,34.06001,-118.231876,US,04/16/1924,06/14/1994
+4,Jerome,Kern,40.758326,-73.963472,40.784781,-73.968547,US,01/27/1885,11/11/45
+5,Joseph,Kosma,47.496904,19.04721,48.857482,2.349271,France,10/22/1905,8/7/69
+6,Victor,Young,41.875331,-87.647052,33.830324,-116.529626,US,8/8/00,11/10/56

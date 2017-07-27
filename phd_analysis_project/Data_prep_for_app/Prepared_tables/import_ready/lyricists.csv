@@ -1,0 +1,7 @@
+lyricist_id,first_names,family_name,place_of_birth_latitude,place_of_birth_longitude,place_of_death_latitude,place_of_death_longitude,predominant_nationality,date_of_birth,date_of_death
+0,Frank,Loesser,40.710516,-74.005511,40.710516,-74.005511,US,06/29/1910,07/29/1969
+1,Johnny,Mercer,32.081247,-81.10357,34.097015,-118.332144,US,11/18/1909,06/25/1976
+2,Larry ,Morey,34.056597,-118.227756,34.420684,-119.694858,US,03/26/1905,5/8/71
+3,Ned,Washington,41.407598,-75.658503,34.073586,-118.399535,US,08/15/1901,12/20/1976
+4,no lyricist,no lyricist,-1,-1,-1,-1,no info,-1,-1
+5,Oscar,Hammerstein II,40.71468,-74.011004,40.310287,-75.12902,US,07/12/1895,08/23/1960

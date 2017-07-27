@@ -1,0 +1,18 @@
+{
+	"Genre": "Acoustic Jazz",
+    "Composer name": "Joseph Kosma",
+	"Composer nationality": "Hungary, France",
+	"Lyricist name": "Johnny Mercer",
+	"Lyricist nationality": "US",
+	"Performer name": "Keith Jarrett",
+	"Performer nationality": "US",
+	"Title": "Autumn Leaves",
+	"Composer collection": "Les Portes De La Nuit",
+	"Performer collection": "Tokyo 96",
+	"Date composed": 1945,
+	"Date recorded": 1996,
+	"Recording location": {
+		"lat": [35.6895, "N"],
+		"lon": [139.6917, "E"]
+	}
+}

@@ -1,0 +1,19 @@
+{
+	"Genre": "Acoustic Jazz",
+    "Composer name": "Jerome Kern",
+	"Composer nationality": "US",
+	"Lyricist name": "Leo Robin",
+	"Lyricist nationality": "US",
+	"Performer name": "Keith Jarrett",
+	"Performer nationality": "US",
+	"Title": "In Love In Vain",
+	"Composer collection": "Centennial Summer",
+	"Performer collection": "Standards, Vol. 2",
+    "Static tempo":147,
+	"Date composed": 1946,
+	"Date recorded": 1983,
+	"Recording location": {
+		"lat": [40.7831, "N"],
+		"lon": [73.9712, "W"]
+	}
+}

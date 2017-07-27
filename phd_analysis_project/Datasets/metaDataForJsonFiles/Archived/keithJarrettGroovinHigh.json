@@ -1,0 +1,16 @@
+{
+	"Genre": "Acoustic Jazz",
+    "Composer name": "Dizzy Gillespie",
+	"Composer nationality": "US",
+	"Performer name": "Keith Jarrett",
+	"Performer nationality": "US",
+	"Title": "Groovin High",
+	"Composer collection": "Shaw Nuff",
+	"Performer collection": "Whisper Not",
+	"Date composed": 1945,
+	"Date recorded": 1999,
+	"Recording location": {
+		"lat": [48.8794, "N"],
+		"lon": [2.2837, "E"]
+	}
+}

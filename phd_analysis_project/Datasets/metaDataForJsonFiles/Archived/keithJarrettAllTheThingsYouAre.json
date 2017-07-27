@@ -1,0 +1,18 @@
+{
+    "Genre": "Acoustic Jazz",
+	"Composer name": "Jerome Kern",
+	"Composer nationality": "US",
+	"Lyricist name": "Oscar Hammerstein II",
+	"Lyricist nationality": "US",
+	"Performer name": "Keith Jarrett",
+	"Performer nationality": "US",
+	"Title": "All The Things You Are",
+	"Composer collection": "Very Warm For May",
+	"Performer collection": "Standards, Vol. 1",
+	"Date composed": 1939,
+	"Date recorded": 1983,
+	"Recording location": {
+		"lat": [40.7831, "N"],
+		"lon": [73.9712, "W"]
+	}
+}

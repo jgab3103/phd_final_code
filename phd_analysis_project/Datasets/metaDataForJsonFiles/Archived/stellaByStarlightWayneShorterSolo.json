@@ -1,0 +1,20 @@
+{
+	"Genre": "Acoustic Jazz",
+    "Composer name": "Victor Young",
+	"Composer nationality": "US",
+	"Lyricist name": "Ned Washington",
+	"Lyricist nationality": "US",
+	"Performer name": "Wayne Shorter",
+	"Performer nationality": "US",
+	"Title": "Stella By Starlight",
+	"Composer collection": "The Uninvited",
+	"Performer collection": "Miles Davis - Live At The Plugged Nickel",
+	"Static tempo":132,
+	"Date composed": 1944,
+	"Date recorded": 1965,
+	"Recording location": {
+		"lat": [41.8781, "N"],
+		"lon": [87.6298, "W"]
+	}
+}
+
